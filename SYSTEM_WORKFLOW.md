@@ -140,7 +140,7 @@ flowchart TD
     Excel --> End
     Error1 --> End
     
-    style Start fill:#e1f5e1
+    style Start fill:#4CAF50,stroke:#2E7D32,color:#fff
     style End fill:#ffe1e1
     style GPU fill:#e3f2fd
     style Training fill:#fff3e0
