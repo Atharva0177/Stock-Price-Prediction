@@ -69,7 +69,7 @@ A production-ready stock price prediction application powered by **PyTorch**, fe
 
 ---
 
-## 📊 Advanced Analytics Modules
+## � Advanced Analytics Modules
 
 ### 1. **Data & Analysis**
 - Historical price data with multiple timeframes
@@ -142,15 +142,7 @@ A production-ready stock price prediction application powered by **PyTorch**, fe
 - Holdings dashboard
 - Complete transaction history
 
-
-### 10. **News Sentiment Analysis**
-- AI-powered TextBlob NLP sentiment scoring
-- NewsAPI integration with real-time news
-- Sentiment classification (Positive/Neutral/Negative)
-- Overall market sentiment indicators
-- Excel export with sentiment breakdown
-
-### 11. **Risk Metrics Dashboard**
+### 10. **Risk Metrics Dashboard**
 - Value at Risk (VaR) at 95% and 99% confidence
 - Conditional VaR (CVaR) for tail risk
 - Maximum Drawdown analysis
@@ -159,14 +151,14 @@ A production-ready stock price prediction application powered by **PyTorch**, fe
 - Risk rating system (Low/Moderate/High/Very High)
 - Interactive drawdown charts
 
-### 12. **Pattern Recognition**
+### 11. **Pattern Recognition**
 - 7 candlestick patterns (Doji, Hammer, Shooting Star, Engulfing, Morning/Evening Star)
 - Automated support/resistance detection
 - Pattern signals (BULLISH/BEARISH/NEUTRAL)
 - 30-day pattern frequency analysis
 - Educational descriptions
 
-### 13. **Reports & Export**
+### 12. **Reports & Export**
 - Comprehensive analysis reports
 - Executive summaries
 - Multi-format exports (TXT, CSV, Excel)
@@ -221,7 +213,6 @@ ELEVATE-1/
     ├── visualizer.py              # Charts and visualizations
     ├── trading_signals.py         # Signal generation
     ├── portfolio_manager.py       # Portfolio tracking
-    ├── news_sentiment.py          # News analysis
     ├── risk_metrics.py            # Risk calculations
     └── pattern_recognition.py     # Pattern detection
 ```
@@ -250,9 +241,9 @@ The central Streamlit application orchestrating all components.
 6. **Stock Comparison** (3101-3400): Multi-stock analysis
 7. **Portfolio** (3401-3700): Paper trading tracker
 8. **Real-Time Monitor** (3701-4400): Google Finance UI, live updates 🔥
-9. **Risk Metrics** (4401-4700): VaR, drawdown, Sharpe ratio
-10. **Pattern Recognition** (4701-4850): Candlestick patterns
-11. **Reports** (4851-4900): Export functionality
+9. **Risk Metrics** (4401-4600): VaR, drawdown, Sharpe ratio
+10. **Pattern Recognition** (4601-4750): Candlestick patterns
+11. **Reports** (4751-4800): Export functionality
 
 ---
 
@@ -319,7 +310,6 @@ scipy>=1.10.0               # Statistical functions
 
 **Advanced Features:**
 ```
-textblob>=0.17.0            # Sentiment analysis
 requests>=2.31.0            # HTTP requests
 ```
 
@@ -848,76 +838,6 @@ def get_transactions_df():
 
 ---
 
-#### **`news_sentiment.py`** (238 lines)
-
-**Class:** `NewsSentimentAnalyzer`
-
-Analyzes news sentiment using NLP.
-
-**Features:**
-
-1. **News Fetching:**
-```python
-def fetch_news(ticker, days=7, max_articles=50):
-    """
-    Retrieve news from NewsAPI or demo data
-    
-    Args:
-        ticker: Stock symbol
-        days: Lookback period
-        max_articles: Result limit
-    
-    Returns:
-        List of articles with title, description, source, date, URL
-    """
-```
-
-2. **Sentiment Analysis:**
-```python
-def analyze_sentiment(text):
-    """
-    TextBlob NLP sentiment scoring
-    
-    Returns:
-        polarity: -1 (negative) to +1 (positive)
-        subjectivity: 0 (objective) to 1 (subjective)
-        label: 'positive', 'neutral', 'negative'
-    """
-```
-
-3. **Aggregated Analysis:**
-```python
-def get_news_sentiment(ticker, days=7):
-    """
-    Comprehensive sentiment report
-    
-    Returns:
-        articles: List with individual sentiments
-        summary: {
-            total_articles: Count
-            avg_sentiment: Mean polarity
-            positive_count: # of positive
-            negative_count: # of negative
-            neutral_count: # of neutral
-            positive_pct: % positive
-            negative_pct: % negative
-            neutral_pct: % neutral
-            overall_label: 'positive'/'negative'/'neutral'
-        }
-    """
-```
-
-**Sentiment Thresholds:**
-- Polarity > 0.1: Positive
-- Polarity < -0.1: Negative
-- -0.1 ≤ Polarity ≤ 0.1: Neutral
-
-**Demo Mode:**
-- Provides sample news data when no API key configured
-- Allows testing without NewsAPI subscription
-
----
-
 #### **`risk_metrics.py`** (347 lines)
 
 **Class:** `RiskAnalyzer`
@@ -1246,7 +1166,6 @@ yfinance>=0.2.0
 plotly>=5.14.0
 scikit-learn>=1.2.0
 scipy>=1.10.0
-textblob>=0.17.0
 openpyxl>=3.1.0
 ```
 
@@ -1414,12 +1333,6 @@ App opens at `http://localhost:8501`
 - Monitor win rates
 - Export portfolio reports
 
-<!-- **News Sentiment:**
-- (Optional) Configure NewsAPI key
-- Analyze article sentiments
-- Review overall market sentiment
-- Export sentiment data -->
-
 **Risk Metrics:**
 - Calculate VaR and CVaR
 - Review drawdown analysis
@@ -1452,14 +1365,6 @@ EPOCHS = 50                   # More = better fit, longer training
 BATCH_SIZE = 32               # Smaller = more updates, noisier gradients
 LEARNING_RATE = 0.001         # Smaller = stable, slower convergence
 ```
-
-### NewsAPI Configuration
-
-1. Sign up at [newsapi.org](https://newsapi.org/)
-2. Get free API key (100 requests/day)
-3. Enter in app sidebar under "NewsAPI Configuration"
-
-**Demo Mode:** App works without API key using sample data
 
 ### Customization
 
@@ -1796,11 +1701,6 @@ Signals:
 - **Stock data from public Yahoo Finance API**
 - **No personal information collected**
 
-### API Keys
-- NewsAPI key stored in session state (temporary)
-- Not persisted to disk
-- Enter each session if needed
-
 ### Recommendations
 - **Don't share portfolio data** publicly
 - **Use environment variables** for production API keys
@@ -1892,7 +1792,6 @@ This application is for **educational and research purposes only**.
 - **TensorFlow/Keras**: Deep learning
 - **Yahoo Finance**: Stock data
 - **Plotly**: Interactive charts
-- **TextBlob**: Sentiment analysis
 - **SciPy**: Statistical analysis
 
 ### Inspiration
@@ -1904,8 +1803,8 @@ This application is for **educational and research purposes only**.
 
 ## 📊 Project Stats
 
-- **Lines of Code**: 5,000+
-- **Modules**: 12
+- **Lines of Code**: 4,700+
+- **Modules**: 11
 - **Features**: 40+
 - **Charts**: 20+
 - **Technical Indicators**: 20+
@@ -1916,8 +1815,17 @@ This application is for **educational and research purposes only**.
 
 ## 🔄 Version History
 
-**Version 2.0** (Current)
-- ✅ Added News Sentiment Analysis
+**Version 2.1** (Current)
+- ✅ Migrated to PyTorch 2.x with CUDA 13.0
+- ✅ Added 6 advanced models (LSTM, Attention-LSTM, N-BEATS, TCN, Transformer, Ensemble)
+- ✅ GPU acceleration with mixed precision training
+- ✅ Real-Time Monitor with Google Finance UI
+- ✅ Configurable prediction parameters
+- ✅ Enhanced candlestick charts with pattern recognition
+- ✅ Model comparison dashboard
+- ✅ Removed News Sentiment Analysis module
+
+**Version 2.0**
 - ✅ Added Risk Metrics Dashboard
 - ✅ Added Pattern Recognition
 - ✅ Enhanced portfolio tracker

@@ -31,7 +31,6 @@ from src.ensemble_model import EnsembleModel
 from src.visualizer import Visualizer
 from src.trading_signals import TradingSignals
 from src.portfolio_manager import PortfolioManager
-from src.news_sentiment import NewsSentimentAnalyzer
 from src.risk_metrics import RiskAnalyzer
 from src.pattern_recognition import PatternRecognizer
 import config
@@ -402,12 +401,12 @@ st.sidebar.markdown("""
 st.sidebar.title("⚙️ Configuration")
 
 # Auto-refresh
-st.sidebar.checkbox(
-    "🔄 Auto-Refresh Data",
-    value=st.session_state.auto_refresh,
-    key='auto_refresh',
-    help="Automatically refresh data every 5 minutes"
-)
+# st.sidebar.checkbox(
+#     "🔄 Auto-Refresh Data",
+#     value=st.session_state.auto_refresh,
+#     key='auto_refresh',
+#     help="Automatically refresh data every 5 minutes"
+# )
 
 st.sidebar.markdown("---")
 
@@ -749,13 +748,13 @@ with st.sidebar:
         "Select Section:",
         [
             "📊 Data & Analysis",
+            "📡 Real-time Monitor",
             "🤖 Model Training",
             "📈 Predictions",
             "🔮 Future Forecast",
             "💡 Trading Signals",
             "📊 Stock Comparison",
             "💼 Portfolio Tracker",
-            "📡 Real-time Monitor",
             "⚠️ Risk Metrics",
             "🔍 Pattern Recognition",
             "📋 Reports & Export"
@@ -3687,198 +3686,6 @@ if active_tab == 7:
         )
     else:
         st.info("No transaction history yet. Start trading to see your history!")
-
-# Tab 9: News Sentiment
-if active_tab == 8:
-    st.markdown('<h2 class="sub-header">📰 News Sentiment Analysis</h2>', unsafe_allow_html=True)
-    
-    st.markdown("""
-    Analyze news sentiment for your selected stock using AI-powered sentiment analysis.
-    """)
-    
-    # API Key input (optional)
-    with st.expander("⚙️ NewsAPI Configuration (Optional)"):
-        news_api_key = st.text_input(
-            "NewsAPI Key",
-            type="password",
-            help="Enter your NewsAPI key from newsapi.org for real-time news. Leave blank for demo data."
-        )
-        if news_api_key:
-            st.session_state['news_api_key'] = news_api_key
-    
-    if st.button("🔍 Analyze News Sentiment", type="primary"):
-        with st.spinner("Fetching and analyzing news..."):
-            try:
-                # Initialize analyzer
-                api_key = st.session_state.get('news_api_key', None)
-                analyzer = NewsSentimentAnalyzer(api_key=api_key)
-                
-                # Get news sentiment
-                sentiment_data = analyzer.get_news_sentiment(ticker)
-                
-                if sentiment_data and sentiment_data.get('articles') and len(sentiment_data.get('articles', [])) > 0:
-                    # Display summary metrics
-                    st.markdown("### 📊 Sentiment Overview")
-                    
-                    summary = sentiment_data['summary']
-                    
-                    col1, col2, col3, col4 = st.columns(4)
-                    
-                    with col1:
-                        st.metric(
-                            "Total Articles",
-                            summary['total_articles']
-                        )
-                    
-                    with col2:
-                        positive_pct = summary['positive_pct']
-                        st.metric(
-                            "Positive",
-                            f"{summary['positive_count']}",
-                            f"{positive_pct:.1f}%"
-                        )
-                    
-                    with col3:
-                        neutral_pct = summary['neutral_pct']
-                        st.metric(
-                            "Neutral",
-                            f"{summary['neutral_count']}",
-                            f"{neutral_pct:.1f}%"
-                        )
-                    
-                    with col4:
-                        negative_pct = summary['negative_pct']
-                        st.metric(
-                            "Negative",
-                            f"{summary['negative_count']}",
-                            f"{negative_pct:.1f}%"
-                        )
-                    
-                    # Sentiment gauge
-                    avg_sentiment = summary['avg_sentiment']
-                    
-                    if avg_sentiment > 0.1:
-                        sentiment_label = "🟢 Positive"
-                        sentiment_color = "#28a745"
-                    elif avg_sentiment < -0.1:
-                        sentiment_label = "🔴 Negative"
-                        sentiment_color = "#dc3545"
-                    else:
-                        sentiment_label = "⚪ Neutral"
-                        sentiment_color = "#6c757d"
-                    
-                    st.markdown(f"""
-                    <div style='
-                        text-align: center;
-                        padding: 1.5rem;
-                        background: linear-gradient(135deg, {sentiment_color}20, {sentiment_color}10);
-                        border-radius: 15px;
-                        border-left: 5px solid {sentiment_color};
-                        margin: 1rem 0;
-                    '>
-                        <h3 style='margin: 0; color: {sentiment_color};'>
-                            Overall Sentiment: {sentiment_label}
-                        </h3>
-                        <p style='font-size: 2rem; margin: 0.5rem 0; color: {sentiment_color};'>
-                            {avg_sentiment:+.3f}
-                        </p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    
-                    # Display articles
-                    st.markdown("### 📰 Recent News Articles")
-                    
-                    for i, article in enumerate(sentiment_data['articles'][:10], 1):
-                        sentiment_info = article['sentiment']
-                        sentiment = sentiment_info['polarity']
-                        published_at = article.get('published', 'N/A')
-                        
-                        if sentiment > 0.1:
-                            badge = "🟢 Positive"
-                            badge_color = "#28a745"
-                        elif sentiment < -0.1:
-                            badge = "🔴 Negative"
-                            badge_color = "#dc3545"
-                        else:
-                            badge = "⚪ Neutral"
-                            badge_color = "#6c757d"
-                        
-                        st.markdown(f"""
-                        <div style='
-                            padding: 1.5rem;
-                            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-                            border-radius: 12px;
-                            border-left: 5px solid {badge_color};
-                            margin-bottom: 1.5rem;
-                            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-                        '>
-                            <div style='display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;'>
-                                <h4 style='margin: 0; color: #1a202c; font-weight: 600; font-size: 1.1rem; flex: 1;'>
-                                    {i}. {article['title']}
-                                </h4>
-                                <span style='
-                                    padding: 0.4rem 0.9rem;
-                                    background: {badge_color};
-                                    color: white;
-                                    border-radius: 25px;
-                                    font-size: 0.85rem;
-                                    font-weight: 600;
-                                    white-space: nowrap;
-                                    margin-left: 1rem;
-                                    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                                '>
-                                    {badge}
-                                </span>
-                            </div>
-                            <p style='margin: 0.75rem 0; color: #2d3748; font-size: 1rem; line-height: 1.6;'>
-                                {article['description']}
-                            </p>
-                            <div style='display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0;'>
-                                <small style='color: #4a5568; font-weight: 500;'>{article['source']} • {published_at}</small>
-                                <a href='{article['url']}' target='_blank' style='
-                                    color: #667eea;
-                                    text-decoration: none;
-                                    font-size: 0.9rem;
-                                '>Read More →</a>
-                            </div>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    
-                    # Export option
-                    st.markdown("### 💾 Export News Data")
-                    
-                    news_df = pd.DataFrame(sentiment_data['articles'])
-                    
-                    output = io.BytesIO()
-                    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-                        news_df.to_excel(writer, sheet_name='News Articles', index=False)
-                        
-                        summary_df = pd.DataFrame({
-                            'Metric': ['Total Articles', 'Positive', 'Neutral', 'Negative', 'Avg Sentiment'],
-                            'Value': [
-                                summary['total_articles'],
-                                f"{summary['positive_count']} ({positive_pct:.1f}%)",
-                                f"{summary['neutral_count']} ({neutral_pct:.1f}%)",
-                                f"{summary['negative_count']} ({negative_pct:.1f}%)",
-                                f"{avg_sentiment:+.3f}"
-                            ]
-                        })
-                        summary_df.to_excel(writer, sheet_name='Summary', index=False)
-                    
-                    st.download_button(
-                        label="📥 Download News Sentiment Report (Excel)",
-                        data=output.getvalue(),
-                        file_name=f"news_sentiment_{ticker}_{datetime.now().strftime('%Y%m%d')}.xlsx",
-                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    )
-                    
-                else:
-                    st.warning("No news articles found for this ticker.")
-                    
-            except Exception as e:
-                st.error(f"Error analyzing news sentiment: {str(e)}")
-    else:
-        st.info("👆 Click the button above to fetch and analyze news sentiment for the selected stock.")
 
 # ==================== TAB 8: REAL-TIME MONITOR ====================
 if active_tab == 8:
