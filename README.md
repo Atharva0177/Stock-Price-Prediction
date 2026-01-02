@@ -1709,36 +1709,6 @@ Signals:
 
 ---
 
-## 🤝 Contributing
-
-Contributions welcome! Areas for improvement:
-
-### Feature Requests
-- [ ] Real-time streaming data
-- [ ] Options pricing models
-- [ ] Cryptocurrency support
-- [ ] Reinforcement learning agents
-- [ ] Backtesting framework
-- [ ] Multi-asset portfolio optimization
-- [ ] Automated trading integration
-- [ ] Mobile app version
-
-### Code Improvements
-- [ ] Unit tests for all modules
-- [ ] Performance optimization
-- [ ] Docker containerization
-- [ ] CI/CD pipeline
-- [ ] Database integration
-- [ ] Caching layer
-- [ ] Async data fetching
-
-### Documentation
-- [ ] Video tutorials
-- [ ] API documentation
-- [ ] Trading strategy guides
-- [ ] Code architecture diagrams
-
----
 
 ## 📄 License
 
@@ -1764,26 +1734,6 @@ This application is for **educational and research purposes only**.
 
 ---
 
-## 📞 Support
-
-### Documentation
-- This README
-- Code comments
-- Docstrings in each module
-
-### Issues
-- Check existing issues on GitHub
-- Provide detailed error messages
-- Include system information
-- Share steps to reproduce
-
-### Resources
-- **Streamlit Docs**: https://docs.streamlit.io
-- **TensorFlow Guide**: https://www.tensorflow.org/tutorials
-- **Yahoo Finance**: https://finance.yahoo.com
-- **Technical Analysis**: https://www.investopedia.com
-
----
 
 ## 🙏 Acknowledgments
 
