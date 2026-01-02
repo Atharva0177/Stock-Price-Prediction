@@ -69,7 +69,7 @@ A production-ready stock price prediction application powered by **PyTorch**, fe
 
 ---
 
-## � Advanced Analytics Modules
+## 📈 Advanced Analytics Modules
 
 ### 1. **Data & Analysis**
 - Historical price data with multiple timeframes
