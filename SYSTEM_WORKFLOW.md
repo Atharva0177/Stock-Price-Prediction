@@ -261,13 +261,6 @@ flowchart TD
 
 ---
 
-## Key Features Removed
-
-- ❌ News Sentiment Analysis (completely removed in v2.1)
-- ❌ TextBlob NLP integration
-- ❌ NewsAPI integration
-
----
 
 ## Technology Stack
 
